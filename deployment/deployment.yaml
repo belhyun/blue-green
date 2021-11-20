@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: dashboard
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
@@ -22,7 +22,7 @@ spec:
         - name: config-volume
           mountPath: /etc/nginx/conf.d/
         - name: log-volume
-          mountPath: /log          
+          mountPath: /log
         ports:
         - containerPort: 80
       volumes:

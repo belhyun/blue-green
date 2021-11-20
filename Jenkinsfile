@@ -29,7 +29,7 @@ pipeline {
   stages {
     stage('git scm update'){
       steps {
-        git url: 'https://github.com/IaC-Source/blue-green.git', branch: 'main'
+        git url: 'https://github.com/belhyun/blue-green.git', branch: 'main'
       }
     }
     stage('define tag'){
@@ -60,7 +60,7 @@ pipeline {
             '''
           }
         }
-      }    
+      }
     }
     stage('switching LB'){
       steps {
@@ -78,7 +78,7 @@ pipeline {
               -o jsonpath --template="{.items[0].status.readyReplicas}")
               echo "total replicas: $replicas, ready replicas: $ready"
               if [ "$ready" -eq "$replicas" ]; then
-                echo "tag change and build deployment file by kustomize" 
+                echo "tag change and build deployment file by kustomize"
                 kustomize edit add label deploy:$tag -f
                 kustomize build . | kubectl apply -f -
                 echo "delete $tag deployment"
