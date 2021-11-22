@@ -104,5 +104,14 @@ pipeline {
         slackSend(message: "${env.JOB_NAME} #${env.BUILD_NUMBER} End", color: 'good', tokenCredentialId: 'slack')
       }
     }
+    stage('send diff') {
+      script {
+          def publisher = LastChanges.getLastChangesPublisher "PREVIOUS_PREVISION", "SIDE", "LINE", true, true, "", "", "", "", ""
+          publisher.publishLastChanges()
+          def htmlDiff = publisher.getHtmlDiff()
+          writeFile file: "deploy-diff-${env.BUILD_NUMBER}.html", text: htmlDiff
+        }
+      }
+    }
   }
 }
