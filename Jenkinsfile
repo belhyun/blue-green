@@ -29,7 +29,7 @@ pipeline {
   stages {
     stage('deploy start') {
       steps {
-        slackSend(message: """${env.JOB_NAME} #${env.BUILD_NUMBER} Start """, color: 'good', tokenCredentialId: 'slack')
+        slackSend(message: "${env.JOB_NAME} #${env.BUILD_NUMBER} Start ", color: 'good', tokenCredentialId: 'slack')
       }
     }
     stage('git scm update'){
@@ -101,7 +101,7 @@ pipeline {
     }
     stage('deploy end') {
       steps {
-        slackSend(message: """${env.JOB_NAME} #${env.BUILD_NUMBER} End """, color: 'good', tokenCredentialId: 'slack')
+        slackSend(message: "${env.JOB_NAME} #${env.BUILD_NUMBER} End", color: 'good', tokenCredentialId: 'slack')
       }
     }
   }
