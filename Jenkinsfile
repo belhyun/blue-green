@@ -99,10 +99,10 @@ pipeline {
         }
       }
     }
-  }
-  stages('deploy end') {
-    steps {
-      slackSend(message: """${env.JOB_NAME} #${env.BUILD_NUMBER} End """, color: 'good', tokenCredentialId: 'slack')
+    stages('deploy end') {
+      steps {
+        slackSend(message: """${env.JOB_NAME} #${env.BUILD_NUMBER} End """, color: 'good', tokenCredentialId: 'slack')
+      }
     }
   }
 }
