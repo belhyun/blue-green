@@ -26,12 +26,12 @@ pipeline {
       '''
     }
   }
-  stages('deploy start') {
-    steps {
-      slackSend(message: """${env.JOB_NAME} #${env.BUILD_NUMBER} Start """, color: 'good', tokenCredentialId: 'slack')
-    }
-  }
   stages {
+    stage('deploy start') {
+      steps {
+        slackSend(message: """${env.JOB_NAME} #${env.BUILD_NUMBER} Start """, color: 'good', tokenCredentialId: 'slack')
+      }
+    }
     stage('git scm update'){
       steps {
         git url: 'https://github.com/belhyun/blue-green.git', branch: 'main'
@@ -99,7 +99,7 @@ pipeline {
         }
       }
     }
-    stages('deploy end') {
+    stage('deploy end') {
       steps {
         slackSend(message: """${env.JOB_NAME} #${env.BUILD_NUMBER} End """, color: 'good', tokenCredentialId: 'slack')
       }
