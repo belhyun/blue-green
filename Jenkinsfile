@@ -112,7 +112,6 @@ pipeline {
             def htmlDiff = publisher.getHtmlDiff()
             writeFile file: "deploy-diff-${env.BUILD_NUMBER}.html", text: htmlDiff
           }
-        }
       }
     }
   }
