@@ -107,7 +107,7 @@ pipeline {
     stage('send diff') {
         steps {
           script {
-            def publisher = LastChanges.getLastChangesPublisher "PREVIOUS_PREVISION", "SIDE", "LINE", true, true, "", "", "", "", ""
+            def publisher = LastChanges.getLastChangesPublisher "PREVIOUS_REVISION", "SIDE", "LINE", true, true, "", "", "", "", ""
             publisher.publishLastChanges()
             def htmlDiff = publisher.getHtmlDiff()
             writeFile file: "deploy-diff-${env.BUILD_NUMBER}.html", text: htmlDiff
